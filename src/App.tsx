@@ -1,13 +1,19 @@
+import { useState } from 'react'
 import { GameStart } from './Components/GameStart/GameStart'
 import { GameBoard } from './Components/GameBoard/GameBoard'
+import { gameContext } from './Context/game-context'
+import { gameType } from './types/game-type'
 
 function App() {
-  // so lets focus on creating the context for each player, intializing them to nothing, and then creating the project base structure.
-  const displayGame = false
+  const [gameInfo, setGameInfo] = useState<gameType | null>(null)
   return (
     <main>
-      {displayGame && <GameStart />}
-      <GameBoard />
+      {!gameInfo && <GameStart />}
+      {gameInfo && (
+        <gameContext.Provider value={{ gameInfo, setGameInfo }}>
+          <GameBoard />
+        </gameContext.Provider>
+      )}
     </main>
   )
 }
