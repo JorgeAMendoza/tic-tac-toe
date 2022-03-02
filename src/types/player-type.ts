@@ -1,4 +1,4 @@
 export interface playerType {
-  playerMark: 'X' | 'Y'
+  playerMark: 'X' | 'O'
   playerScore: number
 }
