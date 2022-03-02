@@ -4,4 +4,5 @@ export interface gameType {
   playerOne: playerType
   playerTwo: playerType
   tiedScore: number
+  gameType: 'player' | 'cpu'
 }

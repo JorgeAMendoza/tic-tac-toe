@@ -6,9 +6,25 @@ import { gameType } from './types/game-type'
 
 function App() {
   const [gameInfo, setGameInfo] = useState<gameType | null>(null)
+  const startGame = (playerOneMark: 'X' | 'O', gameType: 'player' | 'cpu') => {
+    if (playerOneMark === 'X')
+      setGameInfo({
+        playerOne: { playerMark: 'X', playerScore: 0 },
+        playerTwo: { playerMark: 'O', playerScore: 0 },
+        tiedScore: 0,
+        gameType,
+      })
+    else
+      setGameInfo({
+        playerOne: { playerMark: 'O', playerScore: 0 },
+        playerTwo: { playerMark: 'X', playerScore: 0 },
+        tiedScore: 0,
+        gameType,
+      })
+  }
   return (
     <main>
-      {!gameInfo && <GameStart />}
+      {!gameInfo && <GameStart startGame={startGame} />}
       {gameInfo && (
         <gameContext.Provider value={{ gameInfo, setGameInfo }}>
           <GameBoard />
