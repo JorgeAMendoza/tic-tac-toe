@@ -10,19 +10,20 @@ type boardType = [boardMark, boardMark, boardMark]
 type gameBoardType = Array<boardType>
 
 export const GameBoard = () => {
-  const [currentTurn] = useState<'X' | 'O'>('X')
-  const [gameBoard] = useState<gameBoardType>([
-    ['X', 'O', ''],
-    ['X', 'O', ''],
-    ['X', 'O', ''],
+  const [currentTurn, setCurrentTurn] = useState<'X' | 'O'>('X')
+  const [gameBoard, setGameBoard] = useState<gameBoardType>([
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', ''],
   ])
   const { setGameInfo } = useContext(gameContext)
 
-  // const placeMark = (row: number, column: number) => {
-  //   // need to get current turn mark. can be grabbed from the state
-  //   // need to get index where to place mark. grabbed from params.
-  //   // set the gameboard to the new looking board. use map, concat, slice to make it happen
-  // }
+  const placeMark = (row: number, column: number) => {
+    const newGameBoard = [...gameBoard]
+    newGameBoard[row][column] = currentTurn
+    setGameBoard(newGameBoard)
+    setCurrentTurn(currentTurn === 'X' ? 'O' : 'X')
+  }
 
   const resetGame = () => {
     setGameInfo(null)
@@ -32,7 +33,13 @@ export const GameBoard = () => {
     const boardPieces: Array<ReactNode> = []
     for (let i = 0; i < gameBoard.length; i++) {
       for (let j = 0; j < gameBoard[i].length; j++) {
-        boardPieces.push(<BoardPiece key={i + j} mark={gameBoard[i][j]} />)
+        boardPieces.push(
+          <BoardPiece
+            key={`${i},${j}`}
+            mark={gameBoard[i][j]}
+            placeMark={() => placeMark(i, j)}
+          />
+        )
       }
     }
     return boardPieces
