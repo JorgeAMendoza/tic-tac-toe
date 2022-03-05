@@ -3,7 +3,6 @@ import { gameContext } from '../../Context/game-context'
 import { GameIcon } from '../GameIcon/GameIcon'
 import { RestartIcon } from '../Icons/RestartIcon'
 import { BoardPiece } from './BoardPiece/BoardPiece'
-import { ScoreCard } from '../ScoreCard/ScoreCard'
 import { gameBoardType } from '../../types/game-board'
 import { checkWinner } from '../../utils/check-winner'
 
@@ -63,11 +62,7 @@ export const GameBoard = () => {
 
       <div>{renderPieces()}</div>
 
-      <div>
-        <ScoreCard />
-        <ScoreCard />
-        <ScoreCard />
-      </div>
+      <div></div>
     </section>
   )
 }
