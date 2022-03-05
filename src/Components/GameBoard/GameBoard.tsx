@@ -4,10 +4,8 @@ import { GameIcon } from '../GameIcon/GameIcon'
 import { RestartIcon } from '../Icons/RestartIcon'
 import { BoardPiece } from './BoardPiece/BoardPiece'
 import { ScoreCard } from '../ScoreCard/ScoreCard'
-
-type boardMark = 'X' | 'O' | ''
-type boardType = [boardMark, boardMark, boardMark]
-type gameBoardType = Array<boardType>
+import { gameBoardType } from '../../types/game-board'
+import { checkWinner } from '../../utils/check-winner'
 
 export const GameBoard = () => {
   const [currentTurn, setCurrentTurn] = useState<'X' | 'O'>('X')
@@ -22,6 +20,10 @@ export const GameBoard = () => {
     const newGameBoard = [...gameBoard]
     newGameBoard[row][column] = currentTurn
     setGameBoard(newGameBoard)
+    if (checkWinner(gameBoard, currentTurn)) {
+      // we will update the score and add modal funtionality here, but for now just reset the match
+      setGameInfo(null)
+    }
     setCurrentTurn(currentTurn === 'X' ? 'O' : 'X')
   }
 
