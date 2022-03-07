@@ -1,8 +1,8 @@
-import { playerType } from './player-type'
+import { xPlayerType, oPlayerType } from './player-types'
 
 export interface gameType {
-  playerOne: playerType
-  playerTwo: playerType
+  xPlayer: xPlayerType
+  oPlayer: oPlayerType
   tiedScore: number
   gameType: 'player' | 'cpu'
 }
