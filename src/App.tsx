@@ -3,24 +3,18 @@ import { GameStart } from './Components/GameStart/GameStart'
 import { GameBoard } from './Components/GameBoard/GameBoard'
 import { gameContext } from './Context/game-context'
 import { gameType } from './types/game-type'
+import { playerGame, cpuGame } from './utils/game-settings'
 
 function App() {
   const [gameInfo, setGameInfo] = useState<gameType | null>(null)
   const startGame = (playerOneMark: 'X' | 'O', gameType: 'player' | 'cpu') => {
-    if (playerOneMark === 'X')
-      setGameInfo({
-        playerOne: { playerMark: 'X', playerScore: 0 },
-        playerTwo: { playerMark: 'O', playerScore: 0 },
-        tiedScore: 0,
-        gameType,
-      })
-    else
-      setGameInfo({
-        playerOne: { playerMark: 'O', playerScore: 0 },
-        playerTwo: { playerMark: 'X', playerScore: 0 },
-        tiedScore: 0,
-        gameType,
-      })
+    if (gameType === 'player') {
+      if (playerOneMark === 'X') setGameInfo(playerGame.playerOneX)
+      else setGameInfo(playerGame.playerOneO)
+    } else {
+      if (playerOneMark === 'X') setGameInfo(cpuGame.playerOneX)
+      else setGameInfo(cpuGame.playerOneO)
+    }
   }
   return (
     <main>
