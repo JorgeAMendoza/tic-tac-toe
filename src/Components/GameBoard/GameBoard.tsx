@@ -5,6 +5,7 @@ import { RestartIcon } from '../Icons/RestartIcon'
 import { BoardPiece } from './BoardPiece/BoardPiece'
 import { gameBoardType } from '../../types/game-board'
 import { checkWinner } from '../../utils/check-winner'
+import { ScoreCard } from '../ScoreCard/ScoreCard'
 
 export const GameBoard = () => {
   const [currentTurn, setCurrentTurn] = useState<'X' | 'O'>('X')
@@ -13,7 +14,7 @@ export const GameBoard = () => {
     ['', '', ''],
     ['', '', ''],
   ])
-  const { setGameInfo } = useContext(gameContext)
+  const { gameInfo, setGameInfo } = useContext(gameContext)
 
   const placeMark = (row: number, column: number) => {
     const newGameBoard = [...gameBoard]
@@ -62,7 +63,19 @@ export const GameBoard = () => {
 
       <div>{renderPieces()}</div>
 
-      <div></div>
+      <div>
+        <ScoreCard
+          scoreName="X"
+          score={gameInfo.xPlayer.score}
+          playerName={gameInfo.xPlayer.playerName}
+        />
+        <ScoreCard scoreName="TIES" score={gameInfo.tiedScore} />
+        <ScoreCard
+          scoreName="O"
+          score={gameInfo.oPlayer.score}
+          playerName={gameInfo.oPlayer.playerName}
+        />
+      </div>
     </section>
   )
 }
