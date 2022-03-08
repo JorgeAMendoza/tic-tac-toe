@@ -9,6 +9,7 @@ import { ScoreCard } from '../ScoreCard/ScoreCard'
 
 export const GameBoard = () => {
   const [currentTurn, setCurrentTurn] = useState<'X' | 'O'>('X')
+  const [turnCount, setTurnCount] = useState(1)
   const [gameBoard, setGameBoard] = useState<gameBoardType>([
     ['', '', ''],
     ['', '', ''],
@@ -21,10 +22,15 @@ export const GameBoard = () => {
     newGameBoard[row][column] = currentTurn
     setGameBoard(newGameBoard)
     if (checkWinner(gameBoard, currentTurn)) {
-      // we will update the score and add modal funtionality here, but for now just reset the match
+      // if player x wins, increment their score,
+      // if player o wins, increment their score,
       setGameInfo(null)
     }
-    setCurrentTurn(currentTurn === 'X' ? 'O' : 'X')
+
+    setTurnCount(turnCount + 1)
+    if (turnCount === 10) {
+      // increment the tied score
+    } else setCurrentTurn(currentTurn === 'X' ? 'O' : 'X')
   }
 
   const resetGame = () => {
