@@ -22,13 +22,14 @@ export const GameBoard = () => {
     setGameBoard(newGameBoard)
     if (checkWinner(gameBoard, currentTurn)) {
       // we will update the score and add modal funtionality here, but for now just reset the match
-      setGameInfo(null)
+      if (currentTurn === 'X') setGameInfo({ type: 'INCREMENT_X' })
+      else setGameInfo({ type: 'INCREMENT_O' })
     }
     setCurrentTurn(currentTurn === 'X' ? 'O' : 'X')
   }
 
   const resetGame = () => {
-    setGameInfo(null)
+    setGameInfo({ type: 'RESET_GAME' })
   }
 
   const renderPieces = () => {
