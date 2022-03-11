@@ -1,13 +1,13 @@
-import { gameType } from '../types/game-type'
+import { GameType } from '../types/game-type'
 
 interface playerGameType {
-  playerOneX: gameType
-  playerOneO: gameType
+  playerOneX: GameType
+  playerOneO: GameType
 }
 
 interface cpuGameType {
-  playerOneX: gameType
-  playerOneO: gameType
+  playerOneX: GameType
+  playerOneO: GameType
 }
 
 export const playerGame: playerGameType = {
