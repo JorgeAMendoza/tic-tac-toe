@@ -1,8 +1,17 @@
-export const ScoreCard = () => {
+interface ScoreCardProps {
+  scoreName: 'X' | 'O' | 'TIES'
+  score: number
+  playerName?: 'P1' | 'P2' | 'YOU' | 'CPU'
+}
+
+export const ScoreCard = ({ scoreName, score, playerName }: ScoreCardProps) => {
   return (
     <div>
-      <p>X YOU</p>
-      <p>14</p>
+      <p>
+        {scoreName}
+        {playerName && `(${playerName})`}
+      </p>
+      <p>{score}</p>
     </div>
   )
 }
