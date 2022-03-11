@@ -22,7 +22,7 @@ export const GameBoard = () => {
     newGameBoard[row][column] = currentTurn
     setGameBoard(newGameBoard)
     if (checkWinner(gameBoard, currentTurn)) {
-      // we will update the score and add modal funtionality here, but for now just reset the match
+      console.log('winner found')
       if (currentTurn === 'X') setGameInfo({ type: 'INCREMENT_X' })
       else setGameInfo({ type: 'INCREMENT_O' })
     }
