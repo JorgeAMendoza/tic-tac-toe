@@ -1,7 +1,8 @@
-import { gameType } from './game-type'
-import React, { SetStateAction } from 'react'
+import { GameType } from './game-type'
+import React from 'react'
+import { GameReducerActions } from '../Context/game-reducer'
 
-export interface gameContextType {
-  gameInfo: gameType
-  setGameInfo: React.Dispatch<SetStateAction<gameType | null>>
+export interface GameContextType {
+  gameInfo: GameType
+  setGameInfo: React.Dispatch<GameReducerActions>
 }
