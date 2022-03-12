@@ -5,4 +5,5 @@ export interface GameType {
   oPlayer: oPlayerType
   tiedScore: number
   gameType: 'player' | 'cpu'
+  currentWinner: 'X' | 'O' | 'TIED' | ''
 }

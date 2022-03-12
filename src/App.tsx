@@ -18,6 +18,7 @@ function App() {
       else setGameInfo({ type: 'SET_GAME', payload: cpuGame.playerOneO })
     }
   }
+  console.log(gameInfo)
   return (
     <main>
       {!gameInfo && <GameStart startGame={startGame} />}
