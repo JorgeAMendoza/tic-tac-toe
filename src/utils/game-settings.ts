@@ -14,6 +14,7 @@ export const playerGame: playerGameType = {
   playerOneX: {
     tiedScore: 0,
     gameType: 'player',
+    currentWinner: '',
     xPlayer: {
       mark: 'X',
       playerName: 'P1',
@@ -28,6 +29,7 @@ export const playerGame: playerGameType = {
   playerOneO: {
     tiedScore: 0,
     gameType: 'player',
+    currentWinner: '',
     xPlayer: {
       mark: 'X',
       playerName: 'P2',
@@ -45,6 +47,7 @@ export const cpuGame: cpuGameType = {
   playerOneX: {
     tiedScore: 0,
     gameType: 'cpu',
+    currentWinner: '',
     xPlayer: {
       mark: 'X',
       playerName: 'YOU',
@@ -59,6 +62,7 @@ export const cpuGame: cpuGameType = {
   playerOneO: {
     tiedScore: 0,
     gameType: 'cpu',
+    currentWinner: '',
     xPlayer: {
       mark: 'X',
       playerName: 'CPU',
