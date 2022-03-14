@@ -22,14 +22,13 @@ export const GameBoard = () => {
     newGameBoard[row][column] = currentTurn
     setGameBoard(newGameBoard)
     if (checkWinner(gameBoard, currentTurn)) {
-      console.log('winner found')
       if (currentTurn === 'X') setGameInfo({ type: 'INCREMENT_X' })
       else setGameInfo({ type: 'INCREMENT_O' })
     }
 
     setTurnCount(turnCount + 1)
     if (turnCount === 10) {
-      // increment the tied score
+      setGameInfo({ type: 'INCREMENT_TIED' })
     } else setCurrentTurn(currentTurn === 'X' ? 'O' : 'X')
   }
 
@@ -46,6 +45,7 @@ export const GameBoard = () => {
             key={`${i},${j}`}
             mark={gameBoard[i][j]}
             placeMark={() => placeMark(i, j)}
+            testID={`${i},${j}`}
           />
         )
       }
@@ -57,7 +57,7 @@ export const GameBoard = () => {
       <header>
         <GameIcon />
         <div>
-          <p>
+          <p data-testid="currentTurn">
             <span>{currentTurn}</span>
             Turn
           </p>
