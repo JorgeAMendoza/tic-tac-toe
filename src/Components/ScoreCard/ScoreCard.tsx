@@ -11,7 +11,7 @@ export const ScoreCard = ({ scoreName, score, playerName }: ScoreCardProps) => {
         {scoreName}
         {playerName && `(${playerName})`}
       </p>
-      <p>{score}</p>
+      <p data-testid={`score${playerName}`}>{score}</p>
     </div>
   )
 }
