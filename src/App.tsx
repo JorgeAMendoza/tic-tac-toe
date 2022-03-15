@@ -5,10 +5,11 @@ import { gameContext } from './Context/game-context'
 import { playerGame, cpuGame } from './utils/game-settings'
 import { gameReducer } from './Context/game-reducer'
 import { gameBoardType } from './types/game-board'
+import { GameModal } from './Components/GameModal/GameModal'
 
 function App() {
   const [gameInfo, setGameInfo] = useReducer(gameReducer, null)
-  // const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false)
   const [gameBoard, setGameBoard] = useState<gameBoardType>([
     ['', '', ''],
     ['', '', ''],
@@ -30,7 +31,12 @@ function App() {
       {!gameInfo && <GameStart startGame={startGame} />}
       {gameInfo && (
         <gameContext.Provider value={{ gameInfo, setGameInfo }}>
-          <GameBoard gameBoard={gameBoard} setGameBoard={setGameBoard} />
+          <GameBoard
+            gameBoard={gameBoard}
+            setGameBoard={setGameBoard}
+            setShowModal={setShowModal}
+          />
+          {showModal && <GameModal setShowModal={setShowModal} />}
         </gameContext.Provider>
       )}
     </main>

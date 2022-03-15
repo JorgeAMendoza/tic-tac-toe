@@ -8,9 +8,11 @@ import { gameReducer } from '../../../Context/game-reducer'
 import { playerGame } from '../../../utils/game-settings'
 import { GameBoard } from '../../../Components/GameBoard/GameBoard'
 import { gameBoardType } from '../../../types/game-board'
+import { GameModal } from '../../../Components/GameModal/GameModal'
 
 const GameBoardRender = () => {
   const [gameInfo, setGameInfo] = useReducer(gameReducer, playerGame.playerOneX)
+  const [showModal, setShowModal] = useState(false)
   const [gameBoard, setGameBoard] = useState<gameBoardType>([
     ['', '', ''],
     ['', '', ''],
@@ -20,7 +22,12 @@ const GameBoardRender = () => {
     <div>
       {gameInfo && (
         <gameContext.Provider value={{ gameInfo, setGameInfo }}>
-          <GameBoard gameBoard={gameBoard} setGameBoard={setGameBoard} />
+          <GameBoard
+            gameBoard={gameBoard}
+            setGameBoard={setGameBoard}
+            setShowModal={setShowModal}
+          />
+          {showModal && <GameModal setShowModal={setShowModal} />}
         </gameContext.Provider>
       )}
     </div>
@@ -75,8 +82,12 @@ describe('Testing game board render', () => {
 
 describe('Reset the game mid-match', () => {
   test('click reset button, reset modal pops up', async () => {
-    // call the render
-    // click the reset button with find by ID
+    render(<GameBoardRender />)
+    const resetGameButton = await screen.findByTestId('resetGameButton')
+    userEvent.click(resetGameButton)
+
+    const modal = await screen.findByTestId('gameModal')
+    expect(modal).toBeDefined()
     // clicking the modal should render the modal automatically
     // check to see if the modal exist by using "isDefined" or something like that.
   })

@@ -11,9 +11,14 @@ import { ScoreCard } from '../ScoreCard/ScoreCard'
 interface GameBoardProps {
   gameBoard: gameBoardType
   setGameBoard: React.Dispatch<React.SetStateAction<gameBoardType>>
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const GameBoard = ({ gameBoard, setGameBoard }: GameBoardProps) => {
+export const GameBoard = ({
+  gameBoard,
+  setGameBoard,
+  setShowModal,
+}: GameBoardProps) => {
   const [currentTurn, setCurrentTurn] = useState<'X' | 'O'>('X')
   const [turnCount, setTurnCount] = useState(1)
   const { gameInfo, setGameInfo } = useContext(gameContext)
@@ -34,7 +39,7 @@ export const GameBoard = ({ gameBoard, setGameBoard }: GameBoardProps) => {
   }
 
   const resetGame = () => {
-    setGameInfo({ type: 'RESET_GAME' })
+    setShowModal(true)
   }
 
   const renderPieces = () => {
@@ -63,7 +68,7 @@ export const GameBoard = ({ gameBoard, setGameBoard }: GameBoardProps) => {
             Turn
           </p>
         </div>
-        <button onClick={resetGame}>
+        <button onClick={resetGame} data-testid="resetGameButton">
           <RestartIcon />
         </button>
       </header>
