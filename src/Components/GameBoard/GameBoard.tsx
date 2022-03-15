@@ -1,3 +1,4 @@
+import React from 'react'
 import { ReactNode, useState, useContext } from 'react'
 import { gameContext } from '../../Context/game-context'
 import { GameIcon } from '../GameIcon/GameIcon'
@@ -7,14 +8,14 @@ import { gameBoardType } from '../../types/game-board'
 import { checkWinner } from '../../utils/check-winner'
 import { ScoreCard } from '../ScoreCard/ScoreCard'
 
-export const GameBoard = () => {
+interface GameBoardProps {
+  gameBoard: gameBoardType
+  setGameBoard: React.Dispatch<React.SetStateAction<gameBoardType>>
+}
+
+export const GameBoard = ({ gameBoard, setGameBoard }: GameBoardProps) => {
   const [currentTurn, setCurrentTurn] = useState<'X' | 'O'>('X')
   const [turnCount, setTurnCount] = useState(1)
-  const [gameBoard, setGameBoard] = useState<gameBoardType>([
-    ['', '', ''],
-    ['', '', ''],
-    ['', '', ''],
-  ])
   const { gameInfo, setGameInfo } = useContext(gameContext)
 
   const placeMark = (row: number, column: number) => {

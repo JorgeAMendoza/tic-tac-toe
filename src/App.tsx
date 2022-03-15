@@ -1,12 +1,19 @@
-import { useReducer } from 'react'
+import { useReducer, useState } from 'react'
 import { GameStart } from './Components/GameStart/GameStart'
 import { GameBoard } from './Components/GameBoard/GameBoard'
 import { gameContext } from './Context/game-context'
 import { playerGame, cpuGame } from './utils/game-settings'
 import { gameReducer } from './Context/game-reducer'
+import { gameBoardType } from './types/game-board'
 
 function App() {
   const [gameInfo, setGameInfo] = useReducer(gameReducer, null)
+  // const [showModal, setShowModal] = useState(false)
+  const [gameBoard, setGameBoard] = useState<gameBoardType>([
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', ''],
+  ])
   const startGame = (playerOneMark: 'X' | 'O', gameType: 'player' | 'cpu') => {
     if (gameType === 'player') {
       if (playerOneMark === 'X')
@@ -18,13 +25,12 @@ function App() {
       else setGameInfo({ type: 'SET_GAME', payload: cpuGame.playerOneO })
     }
   }
-  console.log(gameInfo)
   return (
     <main>
       {!gameInfo && <GameStart startGame={startGame} />}
       {gameInfo && (
         <gameContext.Provider value={{ gameInfo, setGameInfo }}>
-          <GameBoard />
+          <GameBoard gameBoard={gameBoard} setGameBoard={setGameBoard} />
         </gameContext.Provider>
       )}
     </main>
