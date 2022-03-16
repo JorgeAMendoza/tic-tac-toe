@@ -9,7 +9,9 @@ import { GameModal } from './Components/GameModal/GameModal'
 
 function App() {
   const [gameInfo, setGameInfo] = useReducer(gameReducer, null)
+  const [currentTurn, setCurrentTurn] = useState<'X' | 'O'>('X')
   const [showModal, setShowModal] = useState(false)
+  const [turnCount, setTurnCount] = useState(1)
   const [gameBoard, setGameBoard] = useState<gameBoardType>([
     ['', '', ''],
     ['', '', ''],
@@ -35,11 +37,17 @@ function App() {
             gameBoard={gameBoard}
             setGameBoard={setGameBoard}
             setShowModal={setShowModal}
+            currentTurn={currentTurn}
+            setCurrentTurn={setCurrentTurn}
+            turnCount={turnCount}
+            setTurnCount={setTurnCount}
           />
           {showModal && (
             <GameModal
               setShowModal={setShowModal}
               setGameBoard={setGameBoard}
+              setCurrentTurn={setCurrentTurn}
+              setTurnCount={setTurnCount}
             />
           )}
         </gameContext.Provider>

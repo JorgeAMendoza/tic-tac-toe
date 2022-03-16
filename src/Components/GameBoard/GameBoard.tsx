@@ -1,5 +1,5 @@
 import React from 'react'
-import { ReactNode, useState, useContext } from 'react'
+import { ReactNode, useContext } from 'react'
 import { gameContext } from '../../Context/game-context'
 import { GameIcon } from '../GameIcon/GameIcon'
 import { RestartIcon } from '../Icons/RestartIcon'
@@ -12,15 +12,21 @@ interface GameBoardProps {
   gameBoard: gameBoardType
   setGameBoard: React.Dispatch<React.SetStateAction<gameBoardType>>
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>
+  currentTurn: 'X' | 'O'
+  setCurrentTurn: React.Dispatch<React.SetStateAction<'X' | 'O'>>
+  turnCount: number
+  setTurnCount: React.Dispatch<React.SetStateAction<number>>
 }
 
 export const GameBoard = ({
   gameBoard,
   setGameBoard,
   setShowModal,
+  currentTurn,
+  setCurrentTurn,
+  turnCount,
+  setTurnCount,
 }: GameBoardProps) => {
-  const [currentTurn, setCurrentTurn] = useState<'X' | 'O'>('X')
-  const [turnCount, setTurnCount] = useState(1)
   const { gameInfo, setGameInfo } = useContext(gameContext)
 
   const placeMark = (row: number, column: number) => {
