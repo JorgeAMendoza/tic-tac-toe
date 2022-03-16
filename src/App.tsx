@@ -36,7 +36,12 @@ function App() {
             setGameBoard={setGameBoard}
             setShowModal={setShowModal}
           />
-          {showModal && <GameModal setShowModal={setShowModal} />}
+          {showModal && (
+            <GameModal
+              setShowModal={setShowModal}
+              setGameBoard={setGameBoard}
+            />
+          )}
         </gameContext.Provider>
       )}
     </main>

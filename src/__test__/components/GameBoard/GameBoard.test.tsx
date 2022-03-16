@@ -27,7 +27,12 @@ const GameBoardRender = () => {
             setGameBoard={setGameBoard}
             setShowModal={setShowModal}
           />
-          {showModal && <GameModal setShowModal={setShowModal} />}
+          {showModal && (
+            <GameModal
+              setShowModal={setShowModal}
+              setGameBoard={setGameBoard}
+            />
+          )}
         </gameContext.Provider>
       )}
     </div>
@@ -88,22 +93,33 @@ describe('Reset the game mid-match', () => {
 
     const modal = await screen.findByTestId('gameModal')
     expect(modal).toBeDefined()
-    // clicking the modal should render the modal automatically
-    // check to see if the modal exist by using "isDefined" or something like that.
   })
 
   test('with the modal open, click cancel to continue the current game', async () => {
-    // call the render
-    // click reset button
-    // find the "resume" button and click it
-    // use new variable to find the modal (give modal itself a test ID)
-    // check to ensure its undefined (meaning not found)
+    render(<GameBoardRender />)
+    const resetGameButton = await screen.findByTestId('resetGameButton')
+    userEvent.click(resetGameButton)
+
+    const continueGameButton = await screen.findByText('no, cancel')
+    expect(continueGameButton).toBeDefined()
+    userEvent.click(continueGameButton)
+
+    expect(screen.queryByTestId('gameModal')).toBeNull()
   })
   test('with the modal open, click confirm to restart the game', async () => {
-    // call the render
-    // click the reset button
-    // find the "restart" and click it
-    // confirm that the first turn is x
-    // confirm that every button in the gameboard has a text of empty
+    render(<GameBoardRender />)
+    const resetGameButton = await screen.findByTestId('resetGameButton')
+    const gameBoardPiece = await screen.findByTestId('0,0')
+    userEvent.click(gameBoardPiece)
+    expect(gameBoardPiece.textContent).toBe('X')
+    userEvent.click(resetGameButton)
+
+    const restartGameButton = await screen.findByText('yes, restart')
+    expect(restartGameButton).toBeDefined()
+    userEvent.click(restartGameButton)
+    expect(gameBoardPiece.textContent).toBe('')
+
+    const currentTurn = await screen.findByTestId('currentTurn')
+    expect(currentTurn.textContent).toContain('XTurn')
   })
 })
