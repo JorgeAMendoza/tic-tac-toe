@@ -36,11 +36,13 @@ export const GameBoard = ({
     if (checkWinner(gameBoard, currentTurn)) {
       if (currentTurn === 'X') setGameInfo({ type: 'INCREMENT_X' })
       else setGameInfo({ type: 'INCREMENT_O' })
+      return
     }
 
     setTurnCount(turnCount + 1)
-    if (turnCount === 10) {
+    if (turnCount === 9) {
       setGameInfo({ type: 'INCREMENT_TIED' })
+      setShowModal(true)
     } else setCurrentTurn(currentTurn === 'X' ? 'O' : 'X')
   }
 
@@ -65,7 +67,7 @@ export const GameBoard = ({
     return boardPieces
   }
   return (
-    <section>
+    <section data-testid="gameBoard">
       <header>
         <GameIcon />
         <div>

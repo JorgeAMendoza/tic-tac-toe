@@ -1,4 +1,3 @@
-import React from 'react'
 import { useReducer, useState } from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
@@ -90,43 +89,5 @@ describe('Testing game board render', () => {
 
     const playerOneScore = await screen.findByTestId('scoreP1')
     expect(playerOneScore.textContent).toBe('1')
-  })
-})
-
-describe('Reset the game mid-match', () => {
-  test('click reset button, reset modal pops up', async () => {
-    render(<GameBoardRender />)
-    const resetGameButton = await screen.findByTestId('resetGameButton')
-    userEvent.click(resetGameButton)
-
-    const modal = screen.queryByTestId('gameModal')
-    expect(modal).toBeDefined()
-  })
-
-  test('with the modal open, click cancel to continue the current game', async () => {
-    render(<GameBoardRender />)
-    const resetGameButton = await screen.findByTestId('resetGameButton')
-    userEvent.click(resetGameButton)
-
-    const continueGameButton = await screen.findByText('no, cancel')
-    userEvent.click(continueGameButton)
-
-    expect(screen.queryByTestId('gameModal')).toBeNull()
-  })
-  test('with the modal open, click confirm to restart the game', async () => {
-    render(<GameBoardRender />)
-    const resetGameButton = await screen.findByTestId('resetGameButton')
-    const gameBoardPiece = await screen.findByTestId('0,0')
-    userEvent.click(gameBoardPiece)
-    expect(gameBoardPiece.textContent).toBe('X')
-    userEvent.click(resetGameButton)
-
-    const restartGameButton = await screen.findByText('yes, restart')
-    expect(restartGameButton).toBeDefined()
-    userEvent.click(restartGameButton)
-    expect(gameBoardPiece.textContent).toBe('')
-
-    const currentTurn = await screen.findByTestId('currentTurn')
-    expect(currentTurn.textContent).toContain('XTurn')
   })
 })
