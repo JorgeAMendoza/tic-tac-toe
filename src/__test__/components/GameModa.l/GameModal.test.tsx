@@ -8,6 +8,7 @@ import { playerGame } from '../../../utils/game-settings'
 import { GameBoard } from '../../../Components/GameBoard/GameBoard'
 import { gameBoardType } from '../../../types/game-board'
 import { GameModal } from '../../../Components/GameModal/GameModal'
+import { text } from 'node:stream/consumers'
 
 const GameBoardRender = () => {
   const [gameInfo, setGameInfo] = useReducer(gameReducer, playerGame.playerOneX)
@@ -164,6 +165,95 @@ describe('game modal when tied', () => {
 
     const quitGameButton = await screen.findByText('quit')
     userEvent.click(quitGameButton)
+
+    const gameBoard = screen.queryByTestId('gameBoard')
+    expect(gameBoard).toBeNull()
+  })
+})
+
+describe('game modal when winner', () => {
+  test('game win, player x wins the game', async () => {
+    render(<GameBoardRender />)
+    const gamePieceOne = await screen.findByTestId('0,0')
+    const gamePieceTwo = await screen.findByTestId('0,1')
+    const gamePieceThree = await screen.findByTestId('0,2')
+    const gamePieceEight = await screen.findByTestId('2,1')
+    const gamePieceNine = await screen.findByTestId('2,2')
+
+    userEvent.click(gamePieceOne)
+    userEvent.click(gamePieceNine)
+    userEvent.click(gamePieceTwo)
+    userEvent.click(gamePieceEight)
+    userEvent.click(gamePieceThree)
+
+    const gameModal = screen.queryByTestId('gameModal')
+    expect(gameModal).toBeDefined()
+
+    const xGameModal = screen.queryByTestId('xGameModal')
+    expect(xGameModal).toBeDefined()
+  })
+
+  test('game win, player o wins the game', async () => {
+    render(<GameBoardRender />)
+    const gamePieceOne = await screen.findByTestId('0,0')
+    const gamePieceTwo = await screen.findByTestId('0,1')
+    const gamePieceThree = await screen.findByTestId('0,2')
+    const gamePieceSeven = await screen.findByAltText('2,0')
+    const gamePieceEight = await screen.findByTestId('2,1')
+    const gamePieceNine = await screen.findByTestId('2,2')
+
+    userEvent.click(gamePieceNine)
+    userEvent.click(gamePieceOne)
+    userEvent.click(gamePieceEight)
+    userEvent.click(gamePieceTwo)
+    userEvent.click(gamePieceSeven)
+    userEvent.click(gamePieceThree)
+
+    const gameModal = screen.queryByTestId('gameModal')
+    expect(gameModal).toBeDefined()
+
+    const yGameModal = screen.queryByTestId('yGameModal')
+    expect(yGameModal).toBeDefined()
+  })
+
+  test('game win, player x wins and starts new round', async () => {
+    render(<GameBoardRender />)
+    const gamePieceOne = await screen.findByTestId('0,0')
+    const gamePieceTwo = await screen.findByTestId('0,1')
+    const gamePieceThree = await screen.findByTestId('0,2')
+    const gamePieceEight = await screen.findByTestId('2,1')
+    const gamePieceNine = await screen.findByTestId('2,2')
+
+    userEvent.click(gamePieceOne)
+    userEvent.click(gamePieceNine)
+    userEvent.click(gamePieceTwo)
+    userEvent.click(gamePieceEight)
+    userEvent.click(gamePieceThree)
+
+    const nextRoundButton = await screen.findByTestId('next round')
+    userEvent.click(nextRoundButton)
+
+    await screen.findByText('XTurn')
+  })
+
+  test('game win, player o wins and ends the game', async () => {
+    render(<GameBoardRender />)
+    const gamePieceOne = await screen.findByTestId('0,0')
+    const gamePieceTwo = await screen.findByTestId('0,1')
+    const gamePieceThree = await screen.findByTestId('0,2')
+    const gamePieceSeven = await screen.findByAltText('2,0')
+    const gamePieceEight = await screen.findByTestId('2,1')
+    const gamePieceNine = await screen.findByTestId('2,2')
+
+    userEvent.click(gamePieceNine)
+    userEvent.click(gamePieceOne)
+    userEvent.click(gamePieceEight)
+    userEvent.click(gamePieceTwo)
+    userEvent.click(gamePieceSeven)
+    userEvent.click(gamePieceThree)
+
+    const quitButton = await screen.findByText('quit')
+    userEvent.click(quitButton)
 
     const gameBoard = screen.queryByTestId('gameBoard')
     expect(gameBoard).toBeNull()
