@@ -4,6 +4,7 @@ import { gameContext } from '../../Context/game-context'
 import { gameBoardType } from '../../types/game-board'
 import { ResetModal } from './Variants/ResetModal'
 import { TiedModal } from './Variants/TiedModal'
+import { WinModal } from './Variants/WinModal'
 
 interface GameModalProps {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>
@@ -29,8 +30,8 @@ export const GameModal = ({
       ['', '', ''],
     ])
     setCurrentTurn('X')
-    setShowModal(false)
     setTurnCount(1)
+    setShowModal(false)
   }
 
   const quitGame = () => {
@@ -40,9 +41,9 @@ export const GameModal = ({
       ['', '', ''],
     ])
     setGameInfo({ type: 'RESET_GAME' })
-    setShowModal(false)
     setTurnCount(1)
     setCurrentTurn('X')
+    setShowModal(false)
   }
 
   return (
@@ -52,6 +53,9 @@ export const GameModal = ({
       ) : null}
       {gameInfo.currentWinner === 'TIED' ? (
         <TiedModal resetBoard={resetBoard} quitGame={quitGame} />
+      ) : null}
+      {gameInfo.currentWinner === 'X' || gameInfo.currentWinner === 'O' ? (
+        <WinModal quitGame={quitGame} resetBoard={resetBoard} />
       ) : null}
     </div>
   )

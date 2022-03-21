@@ -8,7 +8,6 @@ import { playerGame } from '../../../utils/game-settings'
 import { GameBoard } from '../../../Components/GameBoard/GameBoard'
 import { gameBoardType } from '../../../types/game-board'
 import { GameModal } from '../../../Components/GameModal/GameModal'
-import { text } from 'node:stream/consumers'
 
 const GameBoardRender = () => {
   const [gameInfo, setGameInfo] = useReducer(gameReducer, playerGame.playerOneX)
@@ -189,8 +188,8 @@ describe('game modal when winner', () => {
     const gameModal = screen.queryByTestId('gameModal')
     expect(gameModal).toBeDefined()
 
-    const xGameModal = screen.queryByTestId('xGameModal')
-    expect(xGameModal).toBeDefined()
+    const oWinMessage = screen.queryByTestId('oWin')
+    expect(oWinMessage).toBeDefined()
   })
 
   test('game win, player o wins the game', async () => {
@@ -198,7 +197,7 @@ describe('game modal when winner', () => {
     const gamePieceOne = await screen.findByTestId('0,0')
     const gamePieceTwo = await screen.findByTestId('0,1')
     const gamePieceThree = await screen.findByTestId('0,2')
-    const gamePieceSeven = await screen.findByAltText('2,0')
+    const gamePieceSeven = await screen.findByTestId('2,0')
     const gamePieceEight = await screen.findByTestId('2,1')
     const gamePieceNine = await screen.findByTestId('2,2')
 
@@ -212,8 +211,8 @@ describe('game modal when winner', () => {
     const gameModal = screen.queryByTestId('gameModal')
     expect(gameModal).toBeDefined()
 
-    const yGameModal = screen.queryByTestId('yGameModal')
-    expect(yGameModal).toBeDefined()
+    const xWinMessage = screen.queryByTestId('oWin')
+    expect(xWinMessage).toBeDefined()
   })
 
   test('game win, player x wins and starts new round', async () => {
@@ -230,10 +229,10 @@ describe('game modal when winner', () => {
     userEvent.click(gamePieceEight)
     userEvent.click(gamePieceThree)
 
-    const nextRoundButton = await screen.findByTestId('next round')
-    userEvent.click(nextRoundButton)
+    await screen.findByTestId('winModal')
 
-    await screen.findByText('XTurn')
+    const nextRoundButton = await screen.findByText('next round')
+    userEvent.click(nextRoundButton)
   })
 
   test('game win, player o wins and ends the game', async () => {
@@ -241,7 +240,7 @@ describe('game modal when winner', () => {
     const gamePieceOne = await screen.findByTestId('0,0')
     const gamePieceTwo = await screen.findByTestId('0,1')
     const gamePieceThree = await screen.findByTestId('0,2')
-    const gamePieceSeven = await screen.findByAltText('2,0')
+    const gamePieceSeven = await screen.findByTestId('2,0')
     const gamePieceEight = await screen.findByTestId('2,1')
     const gamePieceNine = await screen.findByTestId('2,2')
 

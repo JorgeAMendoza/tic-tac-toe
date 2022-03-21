@@ -36,6 +36,7 @@ export const GameBoard = ({
     if (checkWinner(gameBoard, currentTurn)) {
       if (currentTurn === 'X') setGameInfo({ type: 'INCREMENT_X' })
       else setGameInfo({ type: 'INCREMENT_O' })
+      setShowModal(true)
       return
     }
 
