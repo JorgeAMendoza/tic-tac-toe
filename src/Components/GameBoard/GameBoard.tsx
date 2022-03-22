@@ -82,7 +82,7 @@ export const GameBoard = ({
         </button>
       </header>
 
-      <div>{renderPieces()}</div>
+      <div data-testid="gamePieceContainer">{renderPieces()}</div>
 
       <div>
         <ScoreCard

@@ -54,7 +54,7 @@ const GameBoardRender = ({ gameConfig }: GameBoardRenderProps) => {
   )
 }
 
-describe('Testing game board render', () => {
+describe('Testing game board render with player game', () => {
   test('game starts with player x turn', async () => {
     render(<GameBoardRender gameConfig={playerConfiguration} />)
     const currentTurn = await screen.findByTestId('currentTurn')
@@ -97,5 +97,22 @@ describe('Testing game board render', () => {
 
     const playerOneScore = await screen.findByTestId('scoreP1')
     expect(playerOneScore.textContent).toBe('1')
+  })
+})
+
+describe('Testing game board render with cpu game', () => {
+  test('game starts with player x turn', async () => {
+    render(<GameBoardRender gameConfig={cpuConfiguration} />)
+    const currentTurnText = await screen.findByTestId('currentTurn')
+    expect(currentTurnText.textContent).toBe('XTurn')
+  })
+
+  test('after player x turn and cpu move, we should be back with player x turn', async () => {
+    render(<GameBoardRender gameConfig={cpuConfiguration} />)
+    const currentTurnText = await screen.findByTestId('currentTurn')
+    expect(currentTurnText.textContent).toBe('XTurn')
+    const gameBoardPiece = await screen.findByTestId('0,0')
+    userEvent.click(gameBoardPiece)
+    expect(currentTurnText.textContent).toBe('XTurn')
   })
 })
