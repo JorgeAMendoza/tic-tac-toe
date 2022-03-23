@@ -32,6 +32,7 @@ export const GameModal = ({
     setCurrentTurn('X')
     setTurnCount(1)
     setShowModal(false)
+    setGameInfo({ type: 'RESET_MATCH' })
   }
 
   const quitGame = () => {

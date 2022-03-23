@@ -16,6 +16,10 @@ type ResetGameAction = {
   type: 'RESET_GAME'
 }
 
+type ResetMatchAction = {
+  type: 'RESET_MATCH'
+}
+
 type setGameAction = {
   type: 'SET_GAME'
   payload: GameType
@@ -27,6 +31,7 @@ export type GameReducerActions =
   | ResetGameAction
   | setGameAction
   | IncrementTiedAction
+  | ResetMatchAction
 
 export const gameReducer = (
   state: GameType | null,
@@ -63,6 +68,10 @@ export const gameReducer = (
         { tiedScore: state.tiedScore + 1 },
         { currentWinner: 'TIED' }
       )
+    }
+    case 'RESET_MATCH': {
+      if (!state) return state
+      return Object.assign({}, state, { currentWinner: '' })
     }
     case 'SET_GAME': {
       return action.payload
