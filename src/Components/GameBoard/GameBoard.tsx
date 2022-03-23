@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ReactNode, useContext } from 'react'
 import { gameContext } from '../../Context/game-context'
 import { GameIcon } from '../GameIcon/GameIcon'
 import { RestartIcon } from '../Icons/RestartIcon'
 import { BoardPiece } from './BoardPiece/BoardPiece'
 import { gameBoardType } from '../../types/game-board'
-import { checkWinner } from '../../utils/check-winner'
 import { ScoreCard } from '../ScoreCard/ScoreCard'
+import { checkWinner } from '../../utils/check-winner'
+import { cpuMove } from '../../utils/cpu-move'
 
 interface GameBoardProps {
   gameBoard: gameBoardType
@@ -29,6 +30,10 @@ export const GameBoard = ({
 }: GameBoardProps) => {
   const { gameInfo, setGameInfo } = useContext(gameContext)
 
+  useEffect(() => {
+    cpuPlaceMark()
+  }, [currentTurn])
+
   const placeMark = (row: number, column: number) => {
     const newGameBoard = [...gameBoard]
     newGameBoard[row][column] = currentTurn
@@ -45,6 +50,17 @@ export const GameBoard = ({
       setGameInfo({ type: 'INCREMENT_TIED' })
       setShowModal(true)
     } else setCurrentTurn(currentTurn === 'X' ? 'O' : 'X')
+  }
+
+  const cpuPlaceMark = () => {
+    if (!(gameInfo.gameType === 'cpu')) return
+    const xPlayerName = gameInfo.xPlayer.playerName
+    const cpuMark = xPlayerName === 'CPU' ? 'X' : 'O'
+
+    if (!(currentTurn === cpuMark)) return
+
+    const move = cpuMove(gameBoard)
+    placeMark(Number(move.charAt(0)), Number(move.charAt(move.length - 1)))
   }
 
   const resetGame = () => {
@@ -82,7 +98,7 @@ export const GameBoard = ({
         </button>
       </header>
 
-      <div>{renderPieces()}</div>
+      <div data-testid="gamePieceContainer">{renderPieces()}</div>
 
       <div>
         <ScoreCard

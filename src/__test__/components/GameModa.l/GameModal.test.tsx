@@ -4,13 +4,21 @@ import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 import { gameContext } from '../../../Context/game-context'
 import { gameReducer } from '../../../Context/game-reducer'
-import { playerGame } from '../../../utils/game-settings'
+import { playerGame, cpuGame } from '../../../utils/game-settings'
 import { GameBoard } from '../../../Components/GameBoard/GameBoard'
 import { gameBoardType } from '../../../types/game-board'
 import { GameModal } from '../../../Components/GameModal/GameModal'
+import { GameType } from '../../../types/game-type'
 
-const GameBoardRender = () => {
-  const [gameInfo, setGameInfo] = useReducer(gameReducer, playerGame.playerOneX)
+const playerConfiguration = playerGame.playerOneX
+const cpuConfiguration = cpuGame.playerOneX
+
+interface GameBoardRenderProps {
+  gameConfig: GameType
+}
+
+const GameBoardRender = ({ gameConfig }: GameBoardRenderProps) => {
+  const [gameInfo, setGameInfo] = useReducer(gameReducer, gameConfig)
   const [currentTurn, setCurrentTurn] = useState<'X' | 'O'>('X')
   const [turnCount, setTurnCount] = useState(1)
   const [showModal, setShowModal] = useState(false)
@@ -48,7 +56,7 @@ const GameBoardRender = () => {
 
 describe('Reset the game mid-match', () => {
   test('click reset button, reset modal pops up', async () => {
-    render(<GameBoardRender />)
+    render(<GameBoardRender gameConfig={playerConfiguration} />)
     const resetGameButton = await screen.findByTestId('resetGameButton')
     userEvent.click(resetGameButton)
 
@@ -57,7 +65,7 @@ describe('Reset the game mid-match', () => {
   })
 
   test('with the modal open, click cancel to continue the current game', async () => {
-    render(<GameBoardRender />)
+    render(<GameBoardRender gameConfig={playerConfiguration} />)
     const resetGameButton = await screen.findByTestId('resetGameButton')
     userEvent.click(resetGameButton)
 
@@ -67,7 +75,7 @@ describe('Reset the game mid-match', () => {
     expect(screen.queryByTestId('gameModal')).toBeNull()
   })
   test('with the modal open, click confirm to restart the game', async () => {
-    render(<GameBoardRender />)
+    render(<GameBoardRender gameConfig={playerConfiguration} />)
     const resetGameButton = await screen.findByTestId('resetGameButton')
     const gameBoardPiece = await screen.findByTestId('0,0')
     userEvent.click(gameBoardPiece)
@@ -86,7 +94,7 @@ describe('Reset the game mid-match', () => {
 
 describe('game modal when tied', () => {
   test('when game is tied, the modal shows up', async () => {
-    render(<GameBoardRender />)
+    render(<GameBoardRender gameConfig={playerConfiguration} />)
     const gamePieceMoveOne = await screen.findByTestId('1,1')
     const gamePieceMoveTwo = await screen.findByTestId('0,0')
     const gamePieceMoveThree = await screen.findByTestId('0,1')
@@ -112,7 +120,7 @@ describe('game modal when tied', () => {
   })
 
   test('tied modal, restart the match', async () => {
-    render(<GameBoardRender />)
+    render(<GameBoardRender gameConfig={playerConfiguration} />)
     const gamePieceMoveOne = await screen.findByTestId('1,1')
     const gamePieceMoveTwo = await screen.findByTestId('0,0')
     const gamePieceMoveThree = await screen.findByTestId('0,1')
@@ -141,7 +149,7 @@ describe('game modal when tied', () => {
   })
 
   test('tied modal, quit the game', async () => {
-    render(<GameBoardRender />)
+    render(<GameBoardRender gameConfig={playerConfiguration} />)
     const gamePieceMoveOne = await screen.findByTestId('1,1')
     const gamePieceMoveTwo = await screen.findByTestId('0,0')
     const gamePieceMoveThree = await screen.findByTestId('0,1')
@@ -172,7 +180,7 @@ describe('game modal when tied', () => {
 
 describe('game modal when winner', () => {
   test('game win, player x wins the game', async () => {
-    render(<GameBoardRender />)
+    render(<GameBoardRender gameConfig={playerConfiguration} />)
     const gamePieceOne = await screen.findByTestId('0,0')
     const gamePieceTwo = await screen.findByTestId('0,1')
     const gamePieceThree = await screen.findByTestId('0,2')
@@ -193,7 +201,7 @@ describe('game modal when winner', () => {
   })
 
   test('game win, player o wins the game', async () => {
-    render(<GameBoardRender />)
+    render(<GameBoardRender gameConfig={playerConfiguration} />)
     const gamePieceOne = await screen.findByTestId('0,0')
     const gamePieceTwo = await screen.findByTestId('0,1')
     const gamePieceThree = await screen.findByTestId('0,2')
@@ -216,7 +224,7 @@ describe('game modal when winner', () => {
   })
 
   test('game win, player x wins and starts new round', async () => {
-    render(<GameBoardRender />)
+    render(<GameBoardRender gameConfig={playerConfiguration} />)
     const gamePieceOne = await screen.findByTestId('0,0')
     const gamePieceTwo = await screen.findByTestId('0,1')
     const gamePieceThree = await screen.findByTestId('0,2')
@@ -236,7 +244,7 @@ describe('game modal when winner', () => {
   })
 
   test('game win, player o wins and ends the game', async () => {
-    render(<GameBoardRender />)
+    render(<GameBoardRender gameConfig={playerConfiguration} />)
     const gamePieceOne = await screen.findByTestId('0,0')
     const gamePieceTwo = await screen.findByTestId('0,1')
     const gamePieceThree = await screen.findByTestId('0,2')
