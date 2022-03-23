@@ -105,6 +105,9 @@ describe('Testing game board render with cpu game', () => {
     render(<GameBoardRender gameConfig={cpuConfiguration} />)
     const currentTurnText = await screen.findByTestId('currentTurn')
     expect(currentTurnText.textContent).toBe('XTurn')
+
+    const cpuNmae = screen.queryByText('CPU')
+    expect(cpuNmae).toBeDefined()
   })
 
   test('after player x turn and cpu move, we should be back with player x turn', async () => {

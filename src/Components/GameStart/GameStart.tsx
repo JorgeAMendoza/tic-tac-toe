@@ -43,11 +43,11 @@ export const GameStart = ({ startGame }: GameStartPropTypes) => {
           <label>
             <input
               type="checkbox"
-              value="Y"
+              value="O"
               checked={playerPiece[1]}
               onChange={() => handleMarkChange('Y')}
             />
-            <span>Y</span>
+            <span>O</span>
           </label>
         </div>
         <p>remeber: x goes first</p>

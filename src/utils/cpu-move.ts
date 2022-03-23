@@ -1,10 +1,9 @@
 import { gameBoardType } from '../types/game-board'
 
-const madeMoves: { [k: string]: number } = {}
-
 export const cpuMove = (gameBoard: gameBoardType) => {
   let isValidMove = false
-  let validMove
+  let validMove = ''
+  const madeMoves: { [k: string]: number } = {}
 
   while (!isValidMove) {
     const xMove = Math.floor(Math.random() * 3)
