@@ -1,5 +1,9 @@
 import { useState } from 'react'
 import { GameIcon } from '../GameIcon/GameIcon'
+import {
+  YellowButtonPrimary,
+  BlueButtonPrimary,
+} from '../../Styles/Buttons/Button.styled'
 
 interface GameStartPropTypes {
   startGame: (playerOneMark: 'X' | 'O', gameType: 'player' | 'cpu') => void
@@ -53,10 +57,12 @@ export const GameStart = ({ startGame }: GameStartPropTypes) => {
         <p>remeber: x goes first</p>
       </div>
 
-      <button onClick={() => handleGameStart('cpu')}>new game (vs cpu)</button>
-      <button onClick={() => handleGameStart('player')}>
+      <YellowButtonPrimary onClick={() => handleGameStart('cpu')}>
+        new game (vs cpu)
+      </YellowButtonPrimary>
+      <BlueButtonPrimary onClick={() => handleGameStart('player')}>
         new game (vs player)
-      </button>
+      </BlueButtonPrimary>
     </section>
   )
 }
