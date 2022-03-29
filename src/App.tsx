@@ -6,6 +6,7 @@ import { playerGame, cpuGame } from './utils/game-settings'
 import { gameReducer } from './Context/game-reducer'
 import { gameBoardType } from './types/game-board'
 import { GameModal } from './Components/GameModal/GameModal'
+import { GlobalStyles } from './Styles/Global.styled'
 
 function App() {
   const [gameInfo, setGameInfo] = useReducer(gameReducer, null)
@@ -30,6 +31,7 @@ function App() {
   }
   return (
     <main>
+      <GlobalStyles />
       {!gameInfo && <GameStart startGame={startGame} />}
       {gameInfo && (
         <gameContext.Provider value={{ gameInfo, setGameInfo }}>
