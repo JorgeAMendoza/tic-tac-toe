@@ -2,7 +2,7 @@
   "compilerOptions": {
     "plugins": [{
       "name": "typescript-styled-plugin",
-      "validate": true
+      "validate": false
     }],
     "target": "es5",
     "lib": [

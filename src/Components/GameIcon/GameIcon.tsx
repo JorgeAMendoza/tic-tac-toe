@@ -1,15 +1,12 @@
-import { XMarkIcon } from '../Icons/XMarkIcon'
-import { OMarkIcon } from '../Icons/OMarkIcon'
+import logo from '../../Assets/logo.svg'
+import { GameIconStyled } from '../../Styles/GameIcon/GameIcon.styled'
 
 export const GameIcon = () => {
   return (
-    <div>
-      <span>
-        <XMarkIcon />
-      </span>
-      <span>
-        <OMarkIcon />
-      </span>
-    </div>
+    <GameIconStyled>
+      <div>
+        <img src={logo} alt="game logo" />
+      </div>
+    </GameIconStyled>
   )
 }

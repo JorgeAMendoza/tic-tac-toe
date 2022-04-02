@@ -12,8 +12,8 @@ const Button = styled.button`
 `
 
 const PrimaryButton = styled(Button)`
-  padding: 0.5em 2em;
-  border-radius: 5px;
+  padding: 0.9em 2em;
+  border-radius: 15px;
   position: relative;
 `
 
@@ -26,8 +26,8 @@ export const YellowButtonPrimary = styled(PrimaryButton)`
     content: '';
     width: 100%;
     height: 100%;
-    border-radius: 7px;
-    transform: translateY(5px);
+    border-radius: 15px;
+    transform: translateY(7px);
     background-color: #f2b137;
     filter: brightness(85%);
     z-index: -1;
@@ -46,13 +46,13 @@ export const BlueButtonPrimary = styled(PrimaryButton)`
 
   &:before {
     position: absolute;
-    top: 0; 
+    top: 0;
     left: 0;
     content: '';
     width: 100%;
     height: 100%;
-    border-radius: 7px;
-    transform: translateY(5px);
+    border-radius: 15px;
+    transform: translateY(7px);
     background-color: #31c3bd;
     filter: brightness(85%);
     z-index: -1;
