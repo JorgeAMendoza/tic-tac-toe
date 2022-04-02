@@ -22,9 +22,15 @@ export const GlobalStyles = createGlobalStyle`
     justify-content: center;
     align-items: center;
     background-color: #1A2A33;
+
+    #root{
+      width: 90%;
+      max-width: 46rem;
+      margin: 0 auto;
+    }
   } 
 
-  img {
+  img,svg {
     max-width: 100%;
     display: block;
   }

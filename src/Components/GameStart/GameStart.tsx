@@ -1,9 +1,13 @@
 import { useState } from 'react'
 import { GameIcon } from '../GameIcon/GameIcon'
-import {
-  YellowButtonPrimary,
-  BlueButtonPrimary,
-} from '../../Styles/Buttons/Button.styled'
+import { GameStartStyled } from '../../Styles/GameStart/GameStart.styled'
+import { PlayerMark } from '../../Styles/GameStart/PlayerMark.styled'
+import { YellowButtonPrimary } from '../../Styles/Buttons/Button.styled'
+import { BlueButtonPrimary } from '../../Styles/Buttons/Button.styled'
+import { MarkSelection } from '../../Styles/GameStart/MarkSelection.styled'
+import { GameOptions } from '../../Styles/GameStart/GameOptions.styled'
+import { XMarkIcon } from '../Icons/XMarkIcon'
+import { OMarkIcon } from '../Icons/OMarkIcon'
 
 interface GameStartPropTypes {
   startGame: (playerOneMark: 'X' | 'O', gameType: 'player' | 'cpu') => void
@@ -30,11 +34,11 @@ export const GameStart = ({ startGame }: GameStartPropTypes) => {
     else startGame('O', gameType)
   }
   return (
-    <section>
+    <GameStartStyled>
       <GameIcon />
-      <div>
+      <PlayerMark>
         <h2>pick player 1&#39;s mark</h2>
-        <div>
+        <MarkSelection>
           <label>
             <input
               type="checkbox"
@@ -42,7 +46,9 @@ export const GameStart = ({ startGame }: GameStartPropTypes) => {
               checked={playerPiece[0]}
               onChange={() => handleMarkChange('X')}
             />
-            <span>X</span>
+            <div>
+              <XMarkIcon />
+            </div>
           </label>
           <label>
             <input
@@ -51,18 +57,22 @@ export const GameStart = ({ startGame }: GameStartPropTypes) => {
               checked={playerPiece[1]}
               onChange={() => handleMarkChange('Y')}
             />
-            <span>O</span>
+            <div>
+              <OMarkIcon />
+            </div>
           </label>
-        </div>
+        </MarkSelection>
         <p>remeber: x goes first</p>
-      </div>
+      </PlayerMark>
 
-      <YellowButtonPrimary onClick={() => handleGameStart('cpu')}>
-        new game (vs cpu)
-      </YellowButtonPrimary>
-      <BlueButtonPrimary onClick={() => handleGameStart('player')}>
-        new game (vs player)
-      </BlueButtonPrimary>
-    </section>
+      <GameOptions>
+        <YellowButtonPrimary onClick={() => handleGameStart('cpu')}>
+          new game (vs cpu)
+        </YellowButtonPrimary>
+        <BlueButtonPrimary onClick={() => handleGameStart('player')}>
+          new game (vs player)
+        </BlueButtonPrimary>
+      </GameOptions>
+    </GameStartStyled>
   )
 }
