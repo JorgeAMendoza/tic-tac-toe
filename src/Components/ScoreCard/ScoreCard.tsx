@@ -1,3 +1,5 @@
+import { ScoreCardStyled } from '../../Styles/GameBoard/Score/ScoreCard.styled'
+
 interface ScoreCardProps {
   scoreName: 'X' | 'O' | 'TIES'
   score: number
@@ -6,12 +8,12 @@ interface ScoreCardProps {
 
 export const ScoreCard = ({ scoreName, score, playerName }: ScoreCardProps) => {
   return (
-    <div>
+    <ScoreCardStyled scoreCardType={scoreName}>
       <p>
         {scoreName}
-        {playerName && `(${playerName})`}
+        {playerName && ` (${playerName})`}
       </p>
       <p data-testid={`score${playerName}`}>{score}</p>
-    </div>
+    </ScoreCardStyled>
   )
 }

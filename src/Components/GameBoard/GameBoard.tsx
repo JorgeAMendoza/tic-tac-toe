@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import { ReactNode, useContext } from 'react'
+import React, { ReactNode, useContext, useEffect } from 'react'
 import { gameContext } from '../../Context/game-context'
 import { GameIcon } from '../GameIcon/GameIcon'
 import { RestartIcon } from '../Icons/RestartIcon'
@@ -8,6 +7,13 @@ import { gameBoardType } from '../../types/game-board'
 import { ScoreCard } from '../ScoreCard/ScoreCard'
 import { checkWinner } from '../../utils/check-winner'
 import { cpuMove } from '../../utils/cpu-move'
+import { GameBoardStyled } from '../../Styles/GameBoard/GameBoard.styled'
+import { ResetButton } from '../../Styles/Buttons/Button.styled'
+import { Board } from '../../Styles/GameBoard/Board/Board.styled'
+import { CurrentTurn } from '../../Styles/GameBoard/CurrentTurn/CurrentTurn.styled'
+import { XMarkIcon } from '../Icons/XMarkIcon'
+import { OMarkIcon } from '../Icons/OMarkIcon'
+import { Score } from '../../Styles/GameBoard/Score/Score.styled'
 
 interface GameBoardProps {
   gameBoard: gameBoardType
@@ -84,23 +90,21 @@ export const GameBoard = ({
     return boardPieces
   }
   return (
-    <section data-testid="gameBoard">
+    <GameBoardStyled data-testid="gameBoard">
       <header>
         <GameIcon />
-        <div>
-          <p data-testid="currentTurn">
-            <span>{currentTurn}</span>
-            Turn
-          </p>
-        </div>
-        <button onClick={resetGame} data-testid="resetGameButton">
+        <CurrentTurn>
+          <div>{currentTurn === 'X' ? <XMarkIcon /> : <OMarkIcon />}</div>
+          <p data-testid="currentTurn">Turn</p>
+        </CurrentTurn>
+        <ResetButton onClick={resetGame} data-testid="resetGameButton">
           <RestartIcon />
-        </button>
+        </ResetButton>
       </header>
 
-      <div data-testid="gamePieceContainer">{renderPieces()}</div>
+      <Board data-testid="gamePieceContainer">{renderPieces()}</Board>
 
-      <div>
+      <Score>
         <ScoreCard
           scoreName="X"
           score={gameInfo.xPlayer.score}
@@ -112,7 +116,7 @@ export const GameBoard = ({
           score={gameInfo.oPlayer.score}
           playerName={gameInfo.oPlayer.playerName}
         />
-      </div>
-    </section>
+      </Score>
+    </GameBoardStyled>
   )
 }

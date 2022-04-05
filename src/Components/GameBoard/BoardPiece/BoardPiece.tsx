@@ -1,3 +1,5 @@
+import { BoardPieceStyled } from '../../../Styles/GameBoard/BoardPiece/BoardPiece.styled'
+
 interface BoardPiecePropTypes {
   mark: 'X' | 'O' | ''
   placeMark: () => void
@@ -11,12 +13,12 @@ export const BoardPiece = ({
 }: BoardPiecePropTypes) => {
   // state to determine if hovering.
   return (
-    <button
+    <BoardPieceStyled
       onClick={placeMark}
       disabled={mark ? true : false}
       data-testid={testID}
     >
       {mark}
-    </button>
+    </BoardPieceStyled>
   )
 }
