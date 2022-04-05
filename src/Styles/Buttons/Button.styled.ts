@@ -9,12 +9,12 @@ const Button = styled.button`
   font-weight: bold;
   text-transform: uppercase;
   border: none;
+  position: relative;
 `
 
 const PrimaryButton = styled(Button)`
   padding: 0.9em 2em;
   border-radius: 15px;
-  position: relative;
 `
 
 export const YellowButtonPrimary = styled(PrimaryButton)`
@@ -68,6 +68,7 @@ export const BlueButtonSecondary = styled(BlueButtonPrimary)`
 
 export const SecondaryGreyButton = styled(Button)`
   background-color: #a8bfc9;
+  border-radius: 5px;
 
   &:before {
     position: absolute;
@@ -86,4 +87,9 @@ export const SecondaryGreyButton = styled(Button)`
   &:hover {
     background-color: #dbe8ed;
   }
+`
+export const ResetButton = styled(SecondaryGreyButton)`
+  display: flex;
+  justify-content: center;
+  padding: 0.7em;
 `
