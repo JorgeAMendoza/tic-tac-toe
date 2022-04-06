@@ -22,6 +22,7 @@ export const GlobalStyles = createGlobalStyle`
     justify-content: center;
     align-items: center;
     background-color: #1A2A33;
+    position:relative;
 
     #root{
       width: 90%;

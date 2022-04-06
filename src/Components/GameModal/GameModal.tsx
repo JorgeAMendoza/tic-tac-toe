@@ -5,6 +5,7 @@ import { gameBoardType } from '../../types/game-board'
 import { ResetModal } from './Variants/ResetModal'
 import { TiedModal } from './Variants/TiedModal'
 import { WinModal } from './Variants/WinModal'
+import { GameModalStyled } from '../../Styles/GameModal/GameModal.styled'
 
 interface GameModalProps {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>
@@ -48,7 +49,7 @@ export const GameModal = ({
   }
 
   return (
-    <div data-testid="gameModal">
+    <GameModalStyled data-testid="gameModal">
       {gameInfo.currentWinner === '' ? (
         <ResetModal continueGame={continueGame} resetBoard={resetBoard} />
       ) : null}
@@ -58,6 +59,6 @@ export const GameModal = ({
       {gameInfo.currentWinner === 'X' || gameInfo.currentWinner === 'O' ? (
         <WinModal quitGame={quitGame} resetBoard={resetBoard} />
       ) : null}
-    </div>
+    </GameModalStyled>
   )
 }
