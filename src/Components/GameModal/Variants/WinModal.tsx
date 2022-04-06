@@ -2,6 +2,9 @@ import { useContext } from 'react'
 import { XMarkIcon } from '../../Icons/XMarkIcon'
 import { OMarkIcon } from '../../Icons/OMarkIcon'
 import { gameContext } from '../../../Context/game-context'
+import { ModalVariant } from '../../../Styles/GameModal/ModalVariant.styled'
+import { SecondaryGreyButton } from '../../../Styles/Buttons/Button.styled'
+import { SecondaryYellowButton } from '../../../Styles/Buttons/Button.styled'
 
 interface WinModalProps {
   resetBoard: () => void
@@ -18,8 +21,7 @@ export const WinModal = ({ resetBoard, quitGame }: WinModalProps) => {
     const currentWinner = gameInfo.currentWinner
 
     if (currentWinner === 'X') {
-      if (gameType === 'player' && xPlayerName === 'P1')
-        return 'plalyer 1 wins!'
+      if (gameType === 'player' && xPlayerName === 'P1') return 'player 1 wins!'
       else if (gameType === 'player' && xPlayerName === 'P2')
         return 'player 2 wins!'
       else if (gameType === 'cpu' && xPlayerName === 'YOU') return 'you won!'
@@ -34,11 +36,11 @@ export const WinModal = ({ resetBoard, quitGame }: WinModalProps) => {
     }
   }
   return (
-    <div data-testid="winModal">
+    <ModalVariant currentWinner={gameInfo.currentWinner} data-testid="winModal">
       <p>{renderMesasge()}</p>
 
       <div>
-        <p>
+        <h3>
           {gameInfo.currentWinner === 'X' ? (
             <span data-testid="xWin">
               <XMarkIcon />
@@ -49,13 +51,15 @@ export const WinModal = ({ resetBoard, quitGame }: WinModalProps) => {
             </span>
           )}
           takes the round
-        </p>
+        </h3>
       </div>
 
       <div>
-        <button onClick={quitGame}>quit</button>
-        <button onClick={resetBoard}>next round</button>
+        <SecondaryGreyButton onClick={quitGame}>quit</SecondaryGreyButton>
+        <SecondaryYellowButton onClick={resetBoard}>
+          next round
+        </SecondaryYellowButton>
       </div>
-    </div>
+    </ModalVariant>
   )
 }

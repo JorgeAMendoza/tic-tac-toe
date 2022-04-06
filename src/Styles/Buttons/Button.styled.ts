@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const Button = styled.button`
   text-decoration: none;
-  padding: 0.5em;
+  padding: 0.7em 1em;
   min-width: 5ch;
   cursor: pointer;
   font-family: inherit;
@@ -39,6 +39,7 @@ export const YellowButtonPrimary = styled(PrimaryButton)`
 
 export const YellowSecondary = styled(YellowButtonPrimary)`
   padding: 0.5em 1em;
+  border-radius: 5px;
 `
 
 export const BlueButtonPrimary = styled(PrimaryButton)`
@@ -66,9 +67,34 @@ export const BlueButtonSecondary = styled(BlueButtonPrimary)`
   padding: 0.5em 1em;
 `
 
+export const SecondaryYellowButton = styled(Button)`
+  background-color: #f2b137;
+  border-radius: 5px;
+  position: relative;
+
+  &:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 100%;
+    border-radius: 7px;
+    transform: translateY(5px);
+    background-color: #f2b137;
+    filter: brightness(85%);
+    z-index: -1;
+  }
+
+  &:hover {
+    background-color: #ffc860;
+  }
+`
+
 export const SecondaryGreyButton = styled(Button)`
   background-color: #a8bfc9;
   border-radius: 5px;
+  position: relative;
 
   &:before {
     position: absolute;

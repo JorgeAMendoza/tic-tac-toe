@@ -1,3 +1,7 @@
+import { ModalVariant } from '../../../Styles/GameModal/ModalVariant.styled'
+import { SecondaryGreyButton } from '../../../Styles/Buttons/Button.styled'
+import { SecondaryYellowButton } from '../../../Styles/Buttons/Button.styled'
+
 interface ResetModalProps {
   resetBoard: () => void
   continueGame: () => void
@@ -5,12 +9,16 @@ interface ResetModalProps {
 
 export const ResetModal = ({ resetBoard, continueGame }: ResetModalProps) => {
   return (
-    <div>
-      <h3>reset the game?</h3>
+    <ModalVariant currentWinner="">
+      <h3>restart game?</h3>
       <div>
-        <button onClick={continueGame}>no, cancel</button>
-        <button onClick={resetBoard}>yes, restart</button>
+        <SecondaryGreyButton onClick={continueGame}>
+          no, cancel
+        </SecondaryGreyButton>
+        <SecondaryYellowButton onClick={resetBoard}>
+          yes, restart
+        </SecondaryYellowButton>
       </div>
-    </div>
+    </ModalVariant>
   )
 }
