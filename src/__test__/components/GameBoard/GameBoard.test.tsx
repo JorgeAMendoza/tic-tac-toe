@@ -23,9 +23,21 @@ const GameBoardRender = ({ gameConfig }: GameBoardRenderProps) => {
   const [turnCount, setTurnCount] = useState(1)
   const [showModal, setShowModal] = useState(false)
   const [gameBoard, setGameBoard] = useState<gameBoardType>([
-    ['', '', ''],
-    ['', '', ''],
-    ['', '', ''],
+    [
+      { win: false, boardMark: '' },
+      { win: false, boardMark: '' },
+      { win: false, boardMark: '' },
+    ],
+    [
+      { win: false, boardMark: '' },
+      { win: false, boardMark: '' },
+      { win: false, boardMark: '' },
+    ],
+    [
+      { win: false, boardMark: '' },
+      { win: false, boardMark: '' },
+      { win: false, boardMark: '' },
+    ],
   ])
   return (
     <div>

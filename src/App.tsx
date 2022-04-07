@@ -14,9 +14,21 @@ function App() {
   const [showModal, setShowModal] = useState(false)
   const [turnCount, setTurnCount] = useState(1)
   const [gameBoard, setGameBoard] = useState<gameBoardType>([
-    ['', '', ''],
-    ['', '', ''],
-    ['', '', ''],
+    [
+      { win: false, boardMark: '' },
+      { win: false, boardMark: '' },
+      { win: false, boardMark: '' },
+    ],
+    [
+      { win: false, boardMark: '' },
+      { win: false, boardMark: '' },
+      { win: false, boardMark: '' },
+    ],
+    [
+      { win: false, boardMark: '' },
+      { win: false, boardMark: '' },
+      { win: false, boardMark: '' },
+    ],
   ])
   const startGame = (playerOneMark: 'X' | 'O', gameType: 'player' | 'cpu') => {
     if (gameType === 'player') {

@@ -26,9 +26,21 @@ export const GameModal = ({
 
   const resetBoard = () => {
     setGameBoard([
-      ['', '', ''],
-      ['', '', ''],
-      ['', '', ''],
+      [
+        { win: false, boardMark: '' },
+        { win: false, boardMark: '' },
+        { win: false, boardMark: '' },
+      ],
+      [
+        { win: false, boardMark: '' },
+        { win: false, boardMark: '' },
+        { win: false, boardMark: '' },
+      ],
+      [
+        { win: false, boardMark: '' },
+        { win: false, boardMark: '' },
+        { win: false, boardMark: '' },
+      ],
     ])
     setCurrentTurn('X')
     setTurnCount(1)
@@ -38,9 +50,21 @@ export const GameModal = ({
 
   const quitGame = () => {
     setGameBoard([
-      ['', '', ''],
-      ['', '', ''],
-      ['', '', ''],
+      [
+        { win: false, boardMark: '' },
+        { win: false, boardMark: '' },
+        { win: false, boardMark: '' },
+      ],
+      [
+        { win: false, boardMark: '' },
+        { win: false, boardMark: '' },
+        { win: false, boardMark: '' },
+      ],
+      [
+        { win: false, boardMark: '' },
+        { win: false, boardMark: '' },
+        { win: false, boardMark: '' },
+      ],
     ])
     setGameInfo({ type: 'RESET_GAME' })
     setTurnCount(1)

@@ -16,18 +16,42 @@ describe('test return value of cpu move util function', () => {
 
   test('function returns valid move defined in the array', () => {
     const gameBoard: gameBoardType = [
-      ['', '', ''],
-      ['', '', ''],
-      ['', '', ''],
+      [
+        { win: false, boardMark: '' },
+        { win: false, boardMark: '' },
+        { win: false, boardMark: '' },
+      ],
+      [
+        { win: false, boardMark: '' },
+        { win: false, boardMark: '' },
+        { win: false, boardMark: '' },
+      ],
+      [
+        { win: false, boardMark: '' },
+        { win: false, boardMark: '' },
+        { win: false, boardMark: '' },
+      ],
     ]
     const possibleMove = cpuMove(gameBoard)
     expect(possibleCPUMoves).toContain(possibleMove)
   })
   test('function returns middle placement of the board', () => {
     const gameBoard: gameBoardType = [
-      ['X', 'O', 'X'],
-      ['O', '', 'X'],
-      ['O', 'X', 'O'],
+      [
+        { win: false, boardMark: 'X' },
+        { win: false, boardMark: 'O' },
+        { win: false, boardMark: 'X' },
+      ],
+      [
+        { win: false, boardMark: 'O' },
+        { win: false, boardMark: '' },
+        { win: false, boardMark: 'X' },
+      ],
+      [
+        { win: false, boardMark: 'O' },
+        { win: false, boardMark: 'X' },
+        { win: false, boardMark: 'O' },
+      ],
     ]
     const possibleMove = cpuMove(gameBoard)
     expect(possibleMove).toBe('1,1')

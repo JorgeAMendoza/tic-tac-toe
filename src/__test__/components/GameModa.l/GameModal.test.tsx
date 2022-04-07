@@ -4,14 +4,13 @@ import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 import { gameContext } from '../../../Context/game-context'
 import { gameReducer } from '../../../Context/game-reducer'
-import { playerGame, cpuGame } from '../../../utils/game-settings'
+import { playerGame } from '../../../utils/game-settings'
 import { GameBoard } from '../../../Components/GameBoard/GameBoard'
 import { gameBoardType } from '../../../types/game-board'
 import { GameModal } from '../../../Components/GameModal/GameModal'
 import { GameType } from '../../../types/game-type'
 
 const playerConfiguration = playerGame.playerOneX
-const cpuConfiguration = cpuGame.playerOneX
 
 interface GameBoardRenderProps {
   gameConfig: GameType
@@ -23,9 +22,21 @@ const GameBoardRender = ({ gameConfig }: GameBoardRenderProps) => {
   const [turnCount, setTurnCount] = useState(1)
   const [showModal, setShowModal] = useState(false)
   const [gameBoard, setGameBoard] = useState<gameBoardType>([
-    ['', '', ''],
-    ['', '', ''],
-    ['', '', ''],
+    [
+      { win: false, boardMark: '' },
+      { win: false, boardMark: '' },
+      { win: false, boardMark: '' },
+    ],
+    [
+      { win: false, boardMark: '' },
+      { win: false, boardMark: '' },
+      { win: false, boardMark: '' },
+    ],
+    [
+      { win: false, boardMark: '' },
+      { win: false, boardMark: '' },
+      { win: false, boardMark: '' },
+    ],
   ])
   return (
     <div>

@@ -42,8 +42,8 @@ export const GameBoard = ({
 
   const placeMark = (row: number, column: number) => {
     const newGameBoard = [...gameBoard]
-    if (newGameBoard[row][column] !== '') return
-    newGameBoard[row][column] = currentTurn
+    if (newGameBoard[row][column].boardMark !== '') return
+    newGameBoard[row][column].boardMark = currentTurn
     setGameBoard(newGameBoard)
     if (checkWinner(gameBoard, currentTurn)) {
       if (currentTurn === 'X') setGameInfo({ type: 'INCREMENT_X' })
@@ -81,7 +81,7 @@ export const GameBoard = ({
         boardPieces.push(
           <BoardPiece
             key={`${i},${j}`}
-            mark={gameBoard[i][j]}
+            mark={gameBoard[i][j].boardMark}
             placeMark={() => placeMark(i, j)}
             testID={`${i},${j}`}
           />

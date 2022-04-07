@@ -11,7 +11,7 @@ export const cpuMove = (gameBoard: gameBoardType) => {
     const randomMove = `${xMove},${yMove}`
 
     if (randomMove in madeMoves) continue
-    else if (gameBoard[xMove][yMove] !== '') continue
+    else if (gameBoard[xMove][yMove].boardMark !== '') continue
     else {
       isValidMove = true
       madeMoves[randomMove] = 1
