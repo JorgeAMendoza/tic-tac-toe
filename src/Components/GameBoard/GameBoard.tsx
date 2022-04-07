@@ -38,10 +38,11 @@ export const GameBoard = ({
 
   useEffect(() => {
     cpuPlaceMark()
-  }, [currentTurn])
+  }, [currentTurn]) //eslint-disable-line
 
   const placeMark = (row: number, column: number) => {
     const newGameBoard = [...gameBoard]
+    if (newGameBoard[row][column] !== '') return
     newGameBoard[row][column] = currentTurn
     setGameBoard(newGameBoard)
     if (checkWinner(gameBoard, currentTurn)) {

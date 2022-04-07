@@ -6,6 +6,16 @@ export const BoardPieceStyled = styled.button`
   border: none;
   position: relative;
   cursor: pointer;
+  position: relative;
+
+  svg {
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4rem;
+  }
 
   &:before {
     position: absolute;
