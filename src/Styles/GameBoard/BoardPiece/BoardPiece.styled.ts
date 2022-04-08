@@ -4,11 +4,18 @@ import styled from 'styled-components'
 
 interface BoardPieceStyledProps {
   isWin: boolean
+  mark: 'X' | 'O' | ''
 }
 
 export const BoardPieceStyled = styled.button<BoardPieceStyledProps>`
   border-radius: 10px;
-  background-color: #1f3641;
+  background-color: ${({ isWin, mark }) => {
+    if (!isWin) return '#1F3641'
+    else {
+      if (mark === 'X') return '#31C3BD'
+      else return '#F2B137'
+    }
+  }};
   border: none;
   position: relative;
   cursor: pointer;
@@ -22,7 +29,7 @@ export const BoardPieceStyled = styled.button<BoardPieceStyledProps>`
     transform: translate(-50%, -50%);
     width: 4rem;
 
-    * {
+    path {
       fill: ${({ isWin }) => (isWin ? '#1A2A33' : '')};
     }
   }

@@ -28,6 +28,7 @@ export const BoardPiece = ({
   }
   return (
     <BoardPieceStyled
+      mark={mark}
       isWin={isWin}
       onClick={placeMark}
       data-testid={testID}
