@@ -1,6 +1,12 @@
 import styled from 'styled-components'
 
-export const BoardPieceStyled = styled.button`
+// so here we need to determine if the piece is a winning piece, and  what background color to render, lets start off by doing the svg first since it needs to be the dark color when its a in
+
+interface BoardPieceStyledProps {
+  isWin: boolean
+}
+
+export const BoardPieceStyled = styled.button<BoardPieceStyledProps>`
   border-radius: 10px;
   background-color: #1f3641;
   border: none;
@@ -15,6 +21,10 @@ export const BoardPieceStyled = styled.button`
     left: 50%;
     transform: translate(-50%, -50%);
     width: 4rem;
+
+    * {
+      fill: ${({ isWin }) => (isWin ? '#1A2A33' : '')};
+    }
   }
 
   &:before {

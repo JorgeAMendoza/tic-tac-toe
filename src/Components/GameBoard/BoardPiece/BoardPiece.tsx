@@ -6,19 +6,20 @@ import { OMarkIconOutline } from '../../Icons/OMarkIconOutline'
 import { XMarkIconOutline } from '../../Icons/XMarkIconOutline'
 
 interface BoardPiecePropTypes {
+  isWin: boolean
   mark: 'X' | 'O' | ''
   placeMark: () => void
   testID: string
 }
 
 export const BoardPiece = ({
+  isWin,
   mark,
   placeMark,
   testID,
 }: BoardPiecePropTypes) => {
   const [isHovering, setIsHovering] = useState(false)
   const renderMark = () => {
-    console.log(isHovering)
     if (!mark) return null
     else if (mark === 'X' && isHovering) return <XMarkIconOutline />
     else if (mark === 'X') return <XMarkIcon />
@@ -27,8 +28,8 @@ export const BoardPiece = ({
   }
   return (
     <BoardPieceStyled
+      isWin={isWin}
       onClick={placeMark}
-      // disabled={mark ? true : false}
       data-testid={testID}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}

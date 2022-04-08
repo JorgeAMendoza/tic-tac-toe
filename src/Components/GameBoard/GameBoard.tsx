@@ -44,11 +44,22 @@ export const GameBoard = ({
     const newGameBoard = [...gameBoard]
     if (newGameBoard[row][column].boardMark !== '') return
     newGameBoard[row][column].boardMark = currentTurn
-    setGameBoard(newGameBoard)
-    if (checkWinner(gameBoard, currentTurn)) {
+
+    const resultObj = checkWinner(gameBoard, currentTurn)
+    if (resultObj.result) {
       if (currentTurn === 'X') setGameInfo({ type: 'INCREMENT_X' })
       else setGameInfo({ type: 'INCREMENT_O' })
+      const { winIndexOne, winIndexTwo, winIndexThree } = resultObj
+      const [winIndexOneI, winIndexOneJ] = winIndexOne
+      const [winIndexTwoI, winIndexTwoJ] = winIndexTwo
+      const [winIndexThreeI, winIndexThreeJ] = winIndexThree
+
+      newGameBoard[winIndexOneI][winIndexOneJ].win = true
+      newGameBoard[winIndexTwoI][winIndexTwoJ].win = true
+      newGameBoard[winIndexThreeI][winIndexThreeJ].win = true
+
       setShowModal(true)
+      setGameBoard(newGameBoard)
       return
     }
 
@@ -57,6 +68,7 @@ export const GameBoard = ({
       setGameInfo({ type: 'INCREMENT_TIED' })
       setShowModal(true)
     } else setCurrentTurn(currentTurn === 'X' ? 'O' : 'X')
+    setGameBoard(newGameBoard)
   }
 
   const cpuPlaceMark = () => {
@@ -80,6 +92,7 @@ export const GameBoard = ({
       for (let j = 0; j < gameBoard[i].length; j++) {
         boardPieces.push(
           <BoardPiece
+            isWin={gameBoard[i][j].win}
             key={`${i},${j}`}
             mark={gameBoard[i][j].boardMark}
             placeMark={() => placeMark(i, j)}
