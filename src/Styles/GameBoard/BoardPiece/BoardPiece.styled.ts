@@ -1,11 +1,38 @@
 import styled from 'styled-components'
 
-export const BoardPieceStyled = styled.button`
+// so here we need to determine if the piece is a winning piece, and  what background color to render, lets start off by doing the svg first since it needs to be the dark color when its a in
+
+interface BoardPieceStyledProps {
+  isWin: boolean
+  mark: 'X' | 'O' | ''
+}
+
+export const BoardPieceStyled = styled.button<BoardPieceStyledProps>`
   border-radius: 10px;
-  background-color: #1f3641;
+  background-color: ${({ isWin, mark }) => {
+    if (!isWin) return '#1F3641'
+    else {
+      if (mark === 'X') return '#31C3BD'
+      else return '#F2B137'
+    }
+  }};
   border: none;
   position: relative;
   cursor: pointer;
+  position: relative;
+
+  svg {
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4rem;
+
+    path {
+      fill: ${({ isWin }) => (isWin ? '#1A2A33' : '')};
+    }
+  }
 
   &:before {
     position: absolute;
