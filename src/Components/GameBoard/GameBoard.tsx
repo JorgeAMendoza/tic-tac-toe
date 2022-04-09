@@ -37,8 +37,9 @@ export const GameBoard = ({
   const { gameInfo, setGameInfo } = useContext(gameContext)
 
   useEffect(() => {
+    if (turnCount > 9) return
     cpuPlaceMark()
-  }, [currentTurn]) //eslint-disable-line
+  }, [turnCount]) //eslint-disable-line
 
   const placeMark = (row: number, column: number) => {
     const newGameBoard = [...gameBoard]
@@ -80,6 +81,7 @@ export const GameBoard = ({
 
     const move = cpuMove(gameBoard)
     placeMark(Number(move.charAt(0)), Number(move.charAt(move.length - 1)))
+    console.log(gameBoard)
   }
 
   const resetGame = () => {
