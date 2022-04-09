@@ -1,6 +1,27 @@
-# Getting Started with Create React App
+![Game Application Image](./project-images/game-mid.png)
+
+# Front End Mentor Tic Tac Toe Challenge (Intermediate)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is is from FrontEndMasters, [Tic Tac Toe Challenge (Intermediate)](https://www.frontendmentor.io/challenges/tic-tac-toe-game-Re7ZF_E2v/hub/tic-tac-toe-game-y4th6eCpN)
+
+# Stack Used
+
+The main focus of the project was to use React and a better feel of the various hooks, learn how to use Styled components to the best of its abilities, and get better with testing React components and unit testing.
+
+# Problems faced
+
+One major issue was testing React apps, I had used jest to unit test functions before, but not test components themselves, completing this project helped me get a better grasp of the user event aspect of jest, more about grabbing components with various jest methods (query by, find by) and how to test react components without having to interact with them directly.
+
+I have been learning about cypress recently, so I plan to try it out with this project in the future.
+
+# Things I would have done better
+
+For the styled components, it would have been best to put the color schema into its own file and extract from there instead of manually inserting the color hex codes.
+
+I need to get a better undestanding of the react hooks such as Ref and layout, I believed they would have helped me cut down on some of the code, and creating some custom hooks would have helped as well.
+
+I was able to get the cpu move to fire off every time the gameboard re-rendered, but using context I believe I should have created seperate game boards for cpu and player type games.
 
 ## Available Scripts
 
