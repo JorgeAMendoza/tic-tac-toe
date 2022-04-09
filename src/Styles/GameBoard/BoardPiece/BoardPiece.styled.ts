@@ -27,7 +27,7 @@ export const BoardPieceStyled = styled.button<BoardPieceStyledProps>`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 4rem;
+    width: 45%;
 
     path {
       fill: ${({ isWin }) => (isWin ? '#1A2A33' : '')};
